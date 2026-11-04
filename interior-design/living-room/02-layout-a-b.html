@@ -1,0 +1,219 @@
+<title>九柱客廳配置 A／B</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap">
+<style>
+/* Layout: a single drafting column; plans run full width, notes beside them stack on phones. */
+:root {
+  --paper: #F3F4F1; --sheet: #FCFCFA; --ink: #1F2428; --ink-2: #4E575D; --muted: #7D868B; --rule: #D5DAD6;
+  --wood: #EEE3D1; --water: #D9E8EF; --built: #DCDFD9; --feature: #CDBFA6; --sofa: #E2DDD3; --sofa-2: #CFC8BB;
+  --accent: #2456B0; --accent-2: #8A5A1F; --warn: #B4471F; --good: #2E7A58;
+  --serif: "Noto Serif TC", "Songti TC", serif; --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #121517; --sheet: #191D20; --ink: #E5E8E6; --ink-2: #B5BCC0; --muted: #8B949A; --rule: #2E3439;
+  --wood: #352D23; --water: #1C3340; --built: #2A3033; --feature: #574A37; --sofa: #3A3631; --sofa-2: #4A453E;
+  --accent: #8BAEF0; --accent-2: #E0B27A; --warn: #F0956C; --good: #7CC8A2; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --paper: #121517; --sheet: #191D20; --ink: #E5E8E6; --ink-2: #B5BCC0; --muted: #8B949A; --rule: #2E3439;
+  --wood: #352D23; --water: #1C3340; --built: #2A3033; --feature: #574A37; --sofa: #3A3631; --sofa-2: #4A453E;
+  --accent: #8BAEF0; --accent-2: #E0B27A; --warn: #F0956C; --good: #7CC8A2; color-scheme: dark; }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.7; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 44px; }
+h1, h2 { font-family: var(--serif); text-wrap: balance; margin: 0; letter-spacing: .01em; }
+h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.2; }
+h2 { font-size: 24px; line-height: 1.3; }
+h3 { font-size: 16px; margin: 0; }
+p { margin: 0; }
+.lede { color: var(--ink-2); max-width: 68ch; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+header { display: grid; gap: 12px; }
+.notice { border-left: 3px solid var(--accent); background: var(--sheet); padding: 14px 18px; display: grid; gap: 6px; max-width: 80ch; }
+.plan { display: grid; gap: 16px; }
+.plan-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 16px; }
+.pill { font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 999px; border: 1px solid currentColor; }
+.pill.bad { color: var(--warn); } .pill.ok { color: var(--good); }
+.sheet { background: var(--sheet); border: 1px solid var(--rule); overflow-x: auto; }
+.sheet svg { display: block; width: 100%; min-width: 860px; height: auto; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px 32px; }
+.cols > div { min-width: 0; display: grid; gap: 8px; align-content: start; }
+ul { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 16px; height: 12px; border: 1px solid var(--ink-2); display: inline-block; }
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--rule); background: var(--sheet); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 14px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-weight: 700; color: var(--ink-2); background: var(--paper); }
+td.num, th.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+.yes { color: var(--good); font-weight: 700; } .no { color: var(--warn); font-weight: 700; }
+footer { color: var(--muted); font-size: 13px; }
+/* SVG drawing classes (units are mm) */
+svg text { font-family: var(--sans); }
+.floor { fill: var(--wood); } .wet { fill: var(--water); }
+.wall, .col { fill: var(--ink); }
+.glass { fill: var(--sheet); } .glassline { stroke: var(--ink-2); stroke-width: 10; }
+.breakline { stroke: var(--muted); stroke-width: 12; stroke-dasharray: 60 40; fill: none; }
+.built { fill: var(--built); stroke: var(--ink-2); stroke-width: 10; }
+.feature { fill: var(--feature); stroke: var(--ink-2); stroke-width: 10; }
+.stair { fill: var(--sheet); stroke: var(--ink); stroke-width: 14; }
+.stairland { fill: var(--built); stroke: var(--ink); stroke-width: 14; }
+.tread { stroke: var(--ink-2); stroke-width: 8; }
+.rail { stroke: var(--ink); stroke-width: 40; }
+.exist { fill: var(--built); stroke: var(--muted); stroke-width: 10; stroke-dasharray: 40 30; }
+.tv { fill: var(--ink); }
+.sofa { fill: var(--sofa); stroke: var(--ink); stroke-width: 14; }
+.sofaback { fill: var(--sofa-2); }
+.cushion { fill: none; stroke: var(--ink-2); stroke-width: 8; }
+.furn { fill: var(--sheet); stroke: var(--ink); stroke-width: 12; }
+.furnline { fill: none; stroke: var(--ink); stroke-width: 10; }
+.optional { fill: none; stroke: var(--ink-2); stroke-width: 10; stroke-dasharray: 50 35; }
+.rug { fill: none; stroke: var(--ink-2); stroke-width: 8; stroke-dasharray: 20 30; }
+.drying { stroke: var(--ink-2); stroke-width: 18; stroke-dasharray: 60 40; }
+.leaf { stroke: var(--ink); stroke-width: 22; }
+.arc { fill: none; stroke: var(--ink-2); stroke-width: 8; stroke-dasharray: 30 25; }
+.route { fill: none; stroke: var(--accent); stroke-width: 34; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 100 70; }
+.arrowhead { fill: var(--accent); }
+.route-txt { fill: var(--accent); font-size: 130px; font-weight: 700; }
+.dim { stroke: var(--muted); stroke-width: 8; } .dimtick { stroke: var(--muted); stroke-width: 14; }
+.dimtxt { fill: var(--muted); font-family: var(--mono); font-size: 125px; font-weight: 500; }
+.lbl { fill: var(--ink); font-size: 210px; font-weight: 700; }
+.lbl-sm { fill: var(--ink); font-size: 150px; font-weight: 700; }
+.sub { fill: var(--ink-2); font-size: 110px; }
+.sub-xs { fill: var(--ink-2); font-size: 92px; }
+.bi { fill: var(--ink-2); font-size: 100px; font-weight: 500; }
+.tag circle { fill: var(--sheet); stroke: var(--accent-2); stroke-width: 18; }
+.tagtxt { fill: var(--accent-2); font-family: var(--mono); font-size: 140px; font-weight: 600; }
+.warn rect { fill: var(--warn); } .warntxt { fill: var(--sheet); font-size: 110px; font-weight: 700; }
+.sb-dark { fill: var(--ink); } .sb-light { fill: var(--sheet); stroke: var(--ink); stroke-width: 8; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">第一版提案 · 給你和專家討論版比對用</div>
+    <h1>九柱客廳配置 A／B</h1>
+    <p class="lede">依你的平面圖：室內淨寬 430 cm、淨長約 897 cm，上下兩面長牆共 9 根柱子，右上樓梯不動。沙發 300×108 cm，電視 85 吋。尺寸單位為公分，柱子編號 1–9 對應下方表格。</p>
+    <div class="notice">
+      <strong>這兩版是在你提出最新條件之前畫的。</strong>
+      <span>你剛說廁所、浴室、洗衣機都要在最左側有窗的地方，所以<b>方案 A 不符合</b>（它把濕區放在後段），只留著給你比對思路；<b>方案 B 符合</b>，接近你的原始構想。多位專家討論後的 5 個方案會另外給你。</span>
+    </div>
+  </header>
+
+  <section class="plan" aria-labelledby="a-title">
+    <div class="plan-head">
+      <h2 id="a-title">方案 A：客廳靠窗，濕區集中在樓梯旁</h2>
+      <span class="pill bad">不符合新條件第 1 點</span>
+    </div>
+    <div class="sheet"><svg viewBox="-950 -800 10600 6250" role="img" aria-label="方案A平面配置圖" xmlns="http://www.w3.org/2000/svg"><title>方案A平面配置圖</title><defs><marker id="arA" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="arrowhead"/></marker></defs><rect x="0" y="0" width="8969" height="4300" class="floor" /><rect x="-200" y="-200" width="9700" height="200" class="wall" /><rect x="-200" y="4300" width="9700" height="200" class="wall" /><rect x="-200" y="-200" width="200" height="369" class="wall" /><rect x="-200" y="3983" width="200" height="517" class="wall" /><rect x="-200" y="169" width="200" height="3814" class="glass" /><line x1="-130" y1="169" x2="-130" y2="3983" class="glassline"/><line x1="-70" y1="169" x2="-70" y2="3983" class="glassline"/><rect x="-200" y="1650" width="200" height="65" class="wall" /><rect x="-200" y="3195" width="200" height="140" class="wall" /><rect x="8969" y="1843" width="150" height="2657" class="wall" /><path d="M9500 -260 L9500 4560" class="breakline"/><rect x="5700" y="2150" width="1400" height="2150" class="wet" /><rect x="7200" y="2150" width="1769" height="1000" class="wet" /><rect x="7200" y="3250" width="1769" height="1050" class="wet" /><rect x="1150" y="1300" width="2200" height="1950" rx="30" class="rug"/><rect x="0" y="0" width="1000" height="400" class="built" /><rect x="1000" y="0" width="2500" height="400" class="feature" /><rect x="3500" y="0" width="2242" height="400" class="built" /><rect x="0" y="400" width="500" height="3450" class="built" /><rect x="0" y="3850" width="500" height="450" class="built" /><rect x="500" y="3850" width="3250" height="450" class="feature" /><rect x="3750" y="3850" width="750" height="450" class="built" /><rect x="4500" y="3850" width="1100" height="450" class="built" /><rect x="5700" y="3950" width="700" height="350" class="built" /><rect x="6400" y="4000" width="700" height="300" class="built" /><rect x="5742" y="0" width="3024" height="1000" class="stair" /><rect x="5742" y="0" width="958" height="1000" class="stairland" /><line x1="6929.555555555556" y1="0" x2="6929.555555555556" y2="1000" class="tread"/><line x1="7159.111111111111" y1="0" x2="7159.111111111111" y2="1000" class="tread"/><line x1="7388.666666666667" y1="0" x2="7388.666666666667" y2="1000" class="tread"/><line x1="7618.222222222223" y1="0" x2="7618.222222222223" y2="1000" class="tread"/><line x1="7847.777777777777" y1="0" x2="7847.777777777777" y2="1000" class="tread"/><line x1="8077.333333333333" y1="0" x2="8077.333333333333" y2="1000" class="tread"/><line x1="8306.888888888889" y1="0" x2="8306.888888888889" y2="1000" class="tread"/><line x1="8536.444444444445" y1="0" x2="8536.444444444445" y2="1000" class="tread"/><line x1="6700" y1="0" x2="6700" y2="1000" class="tread"/><line x1="5742" y1="1000" x2="8766" y2="1000" class="rail"/><text x="7733.0" y="500" class="lbl-sm" text-anchor="middle" dominant-baseline="central">樓梯（不動）</text><text x="6221.0" y="420" class="sub" text-anchor="middle" dominant-baseline="central">平台</text><text x="6221.0" y="620" class="sub" text-anchor="middle" dominant-baseline="central">上下口</text><rect x="7965" y="1066" width="1004" height="115" class="exist" /><text x="8467" y="1300" class="sub-xs" text-anchor="middle" dominant-baseline="central">既有短牆</text><rect x="0" y="0" width="480" height="180" class="col" /><rect x="480" y="0" width="405" height="385" class="col" /><rect x="2795" y="0" width="405" height="255" class="col" /><rect x="4520" y="0" width="405" height="300" class="col" /><rect x="0" y="4120" width="425" height="180" class="col" /><rect x="425" y="3915" width="405" height="385" class="col" /><rect x="2610" y="4060" width="405" height="240" class="col" /><rect x="4095" y="3900" width="405" height="400" class="col" /><rect x="5600" y="4200" width="400" height="100" class="col" /><rect x="5600" y="2050" width="600" height="100" class="wall" /><rect x="7000" y="2050" width="600" height="100" class="wall" /><rect x="8300" y="2050" width="669" height="100" class="wall" /><rect x="5600" y="2150" width="100" height="2150" class="wall" /><rect x="7100" y="2150" width="100" height="1250" class="wall" /><rect x="7100" y="4100" width="100" height="200" class="wall" /><rect x="7200" y="3150" width="1769" height="100" class="wall" /><line x1="6200" y1="2070.0" x2="6800" y2="2070.0" class="leaf"/><line x1="6400" y1="2130.0" x2="7000" y2="2130.0" class="leaf"/><line x1="7600" y1="2150" x2="7600" y2="2850" class="leaf"/><path d="M8300 2150 A700.0 700.0 0 0 1 7600 2850" class="arc"/><line x1="7120.0" y1="3400" x2="7120.0" y2="3900" class="leaf"/><line x1="7180.0" y1="3600" x2="7180.0" y2="4100" class="leaf"/><rect x="1305.0" y="400" width="1890.0" height="70" class="tv" /><text x="2250" y="630" class="sub" text-anchor="middle" dominant-baseline="central">85 吋電視</text><rect x="750" y="2770" width="3000" height="1080" rx="90" class="sofa"/><rect x="950" y="3620" width="2600" height="200" class="sofaback" /><rect x="965.0" y="2810" width="836.6666666666666" height="770" rx="50" class="cushion"/><rect x="1831.6666666666665" y="2810" width="836.6666666666666" height="770" rx="50" class="cushion"/><rect x="2698.333333333333" y="2810" width="836.6666666666666" height="770" rx="50" class="cushion"/><text x="2250.0" y="3195.0" class="sub" text-anchor="middle" dominant-baseline="central">沙發 300×108</text><rect x="1600" y="1720" width="1300" height="650" rx="40" class="furn"/><text x="2250.0" y="2045.0" class="sub" text-anchor="middle" dominant-baseline="central">茶几</text><circle cx="625" cy="3350" r="105" class="furnline"/><rect x="3975" y="1850" width="1400" height="800" rx="40" class="furn"/><text x="4675.0" y="2250.0" class="sub" text-anchor="middle" dominant-baseline="central">餐桌／工作桌 140×80</text><rect x="4235" y="1410" width="430" height="430" rx="70" class="furn"/><rect x="4235" y="2660" width="430" height="430" rx="70" class="furn"/><rect x="4685" y="1410" width="430" height="430" rx="70" class="furn"/><rect x="4685" y="2660" width="430" height="430" rx="70" class="furn"/><rect x="5700" y="2300" width="500" height="900" class="furn" /><ellipse cx="5960" cy="2750" rx="170" ry="230" class="furnline"/><rect x="5700" y="3300" width="700" height="650" class="furn" /><circle cx="6050.0" cy="3625.0" r="214.5" class="furnline"/><text x="6050.0" y="3625.0" class="sub-xs" text-anchor="middle" dominant-baseline="central">洗/烘疊放</text><rect x="8789" y="2450" width="180" height="400" class="furn" /><ellipse cx="8539" cy="2650" rx="260" ry="185" class="furn"/><rect x="7200" y="2420" width="280" height="460" class="furn" /><ellipse cx="7330" cy="2650" rx="95" ry="140" class="furnline"/><circle cx="8150" cy="3780" r="70" class="furnline"/><rect x="7260" y="3520" width="1660" height="740" rx="200" class="optional"/><text x="2250" y="200" class="bi" text-anchor="middle" dominant-baseline="central">電視主牆（③藏在裡面）</text><text x="4000" y="200" class="bi" text-anchor="middle" dominant-baseline="central">收納／書櫃</text><text x="250" y="2125" class="bi" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 250 2125)">窗邊臥榻（下方抽屜）</text><text x="1720" y="4075" class="bi" text-anchor="middle" dominant-baseline="central">沙發背牆＋⑥⑦間展示龕</text><text x="3940" y="4075" class="bi" text-anchor="middle" dominant-baseline="central">收納</text><text x="5050" y="4075" class="bi" text-anchor="middle" dominant-baseline="central">電器櫃</text><text x="6750" y="4150" class="bi" text-anchor="middle" dominant-baseline="central">毛巾架</text><text x="1100" y="1250" class="lbl" text-anchor="middle" dominant-baseline="central">客廳</text><text x="4675" y="3440" class="lbl" text-anchor="middle" dominant-baseline="central">多功能區</text><text x="6650" y="2480" class="lbl-sm" text-anchor="middle" dominant-baseline="central">洗衣・洗手</text><text x="6650" y="2700" class="lbl-sm" text-anchor="middle" dominant-baseline="central">・更衣</text><text x="6650" y="2920" class="sub" text-anchor="middle" dominant-baseline="central">140×215</text><text x="7820" y="3010" class="sub" text-anchor="middle" dominant-baseline="central">廁所 177×100</text><text x="8090" y="3400" class="lbl-sm" text-anchor="middle" dominant-baseline="central">淋浴間 177×105</text><text x="8090" y="4120" class="sub-xs" text-anchor="middle" dominant-baseline="central">虛線：可改 170 cm 浴缸</text><text x="5960" y="2750" class="sub-xs" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 5960 2750)">洗手台</text><text x="7600" y="1760" class="sub" text-anchor="middle" dominant-baseline="central">走廊</text><path d="M6200 1150 L5450 1000 L3700 1000 L2600 1120" class="route" marker-end="url(#arA)"/><path d="M6700 1500 L9300 1500" class="route" marker-end="url(#arA)"/><path d="M6600 1600 L6600 2000" class="route" marker-end="url(#arA)"/><path d="M7950 1600 L7950 2000" class="route" marker-end="url(#arA)"/><text x="9350" y="1300" class="route-txt" text-anchor="end" dominant-baseline="central">往後方</text><line x1="0" y1="4820" x2="8969" y2="4820" class="dim"/><line x1="-60" y1="4880" x2="60" y2="4760" class="dimtick"/><line x1="0" y1="4710" x2="0" y2="4930" class="dim"/><line x1="8909" y1="4880" x2="9029" y2="4760" class="dimtick"/><line x1="8969" y1="4710" x2="8969" y2="4930" class="dim"/><text x="4484.5" y="4730" class="dimtxt" text-anchor="middle">897</text><line x1="-620" y1="0" x2="-620" y2="4300" class="dim"/><line x1="-680" y1="60" x2="-560" y2="-60" class="dimtick"/><line x1="-730" y1="0" x2="-510" y2="0" class="dim"/><line x1="-680" y1="4360" x2="-560" y2="4240" class="dimtick"/><line x1="-730" y1="4300" x2="-510" y2="4300" class="dim"/><text x="-710" y="2150.0" class="dimtxt" text-anchor="middle" transform="rotate(-90 -710 2150.0)">430</text><line x1="1450" y1="470" x2="1450" y2="2770" class="dim"/><line x1="1390" y1="530" x2="1510" y2="410" class="dimtick"/><line x1="1340" y1="470" x2="1560" y2="470" class="dim"/><line x1="1390" y1="2830" x2="1510" y2="2710" class="dimtick"/><line x1="1340" y1="2770" x2="1560" y2="2770" class="dim"/><text x="1600" y="1620.0" class="dimtxt" text-anchor="middle" transform="rotate(-90 1600 1620.0)">231</text><line x1="5850" y1="1000" x2="5850" y2="2050" class="dim"/><line x1="5790" y1="1060" x2="5910" y2="940" class="dimtick"/><line x1="5740" y1="1000" x2="5960" y2="1000" class="dim"/><line x1="5790" y1="2110" x2="5910" y2="1990" class="dimtick"/><line x1="5740" y1="2050" x2="5960" y2="2050" class="dim"/><text x="6000" y="1525.0" class="dimtxt" text-anchor="middle" transform="rotate(-90 6000 1525.0)">105</text><text x="-420" y="2075" class="sub" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 -420 2075)">窗（唯一採光面）</text><g class="tag"><circle cx="240.0" cy="90.0" r="120"/><text x="240.0" y="96.0" class="tagtxt" text-anchor="middle" dominant-baseline="central">1</text></g><g class="tag"><circle cx="682.5" cy="192.5" r="120"/><text x="682.5" y="198.5" class="tagtxt" text-anchor="middle" dominant-baseline="central">2</text></g><g class="tag"><circle cx="2997.5" cy="127.5" r="120"/><text x="2997.5" y="133.5" class="tagtxt" text-anchor="middle" dominant-baseline="central">3</text></g><g class="tag"><circle cx="4722.5" cy="150.0" r="120"/><text x="4722.5" y="156.0" class="tagtxt" text-anchor="middle" dominant-baseline="central">4</text></g><g class="tag"><circle cx="212.5" cy="4210.0" r="120"/><text x="212.5" y="4216.0" class="tagtxt" text-anchor="middle" dominant-baseline="central">5</text></g><g class="tag"><circle cx="627.5" cy="4107.5" r="120"/><text x="627.5" y="4113.5" class="tagtxt" text-anchor="middle" dominant-baseline="central">6</text></g><g class="tag"><circle cx="2812.5" cy="4180.0" r="120"/><text x="2812.5" y="4186.0" class="tagtxt" text-anchor="middle" dominant-baseline="central">7</text></g><g class="tag"><circle cx="4297.5" cy="4100.0" r="120"/><text x="4297.5" y="4106.0" class="tagtxt" text-anchor="middle" dominant-baseline="central">8</text></g><g class="tag"><circle cx="5800.0" cy="4250.0" r="120"/><text x="5800.0" y="4256.0" class="tagtxt" text-anchor="middle" dominant-baseline="central">9</text></g><rect x="6900" y="5050" width="1000" height="50" class="sb-dark" /><rect x="7900" y="5050" width="1000" height="50" class="sb-light" /><text x="6900" y="5220" class="dimtxt" text-anchor="middle" dominant-baseline="central">0</text><text x="7900" y="5220" class="dimtxt" text-anchor="middle" dominant-baseline="central">1</text><text x="8900" y="5220" class="dimtxt" text-anchor="middle" dominant-baseline="central">2 m</text></svg></div>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--wood)"></i>客廳／多功能區地板</span>
+      <span><i class="sw" style="background:var(--water)"></i>濕區</span>
+      <span><i class="sw" style="background:var(--built)"></i>收納櫃</span>
+      <span><i class="sw" style="background:var(--feature)"></i>電視主牆／沙發背牆</span>
+      <span><i class="sw" style="background:var(--ink)"></i>牆、柱</span>
+      <span><i class="sw" style="background:var(--accent);border-color:var(--accent)"></i>主要動線</span>
+    </div>
+    <div class="cols">
+      <div>
+        <h3>做法</h3>
+        <ul>
+          <li>上下兩面長牆各做一道 40–45 cm 深的櫃牆，9 根柱子全部收進櫃子裡。</li>
+          <li>窗邊做 50 cm 深臥榻，和沙發形成 L 形座位。</li>
+          <li>廁所、淋浴、洗衣更衣三間分開，集中在樓梯下方的後段。</li>
+        </ul>
+      </div>
+      <div>
+        <h3>尺寸檢核</h3>
+        <ul>
+          <li>眼睛到 85 吋螢幕約 300 cm（建議 260–350）</li>
+          <li>電視到沙發前緣 231 cm，沙發到茶几 40 cm</li>
+          <li>樓梯旁走廊 105 cm；走去衛浴不經過電視前</li>
+        </ul>
+      </div>
+      <div>
+        <h3>為什麼不符合</h3>
+        <ul>
+          <li>濕區沒有窗，要靠抽風管排濕。</li>
+          <li>你要求濕區放在最左側窗邊，所以這版只留作比對。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="plan" aria-labelledby="b-title">
+    <div class="plan-head">
+      <h2 id="b-title">方案 B：濕區留在窗邊，客廳在中段</h2>
+      <span class="pill ok">符合新條件</span>
+    </div>
+    <div class="sheet"><svg viewBox="-950 -800 10600 6250" role="img" aria-label="方案B平面配置圖" xmlns="http://www.w3.org/2000/svg"><title>方案B平面配置圖</title><defs><marker id="arB" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="arrowhead"/></marker></defs><rect x="0" y="0" width="8969" height="4300" class="floor" /><rect x="-200" y="-200" width="9700" height="200" class="wall" /><rect x="-200" y="4300" width="9700" height="200" class="wall" /><rect x="-200" y="-200" width="200" height="369" class="wall" /><rect x="-200" y="3983" width="200" height="517" class="wall" /><rect x="-200" y="169" width="200" height="3814" class="glass" /><line x1="-130" y1="169" x2="-130" y2="3983" class="glassline"/><line x1="-70" y1="169" x2="-70" y2="3983" class="glassline"/><rect x="-200" y="1650" width="200" height="65" class="wall" /><rect x="-200" y="3195" width="200" height="140" class="wall" /><rect x="8969" y="1843" width="150" height="2657" class="wall" /><path d="M9500 -260 L9500 4560" class="breakline"/><rect x="0" y="0" width="2610" height="4300" class="wet" /><rect x="3050" y="1300" width="2400" height="1950" rx="30" class="rug"/><rect x="2710" y="0" width="590" height="400" class="built" /><rect x="3300" y="0" width="1900" height="400" class="feature" /><rect x="5200" y="0" width="542" height="400" class="built" /><rect x="2710" y="3850" width="2890" height="450" class="feature" /><rect x="8369" y="1843" width="600" height="2457" class="built" /><rect x="0" y="180" width="480" height="520" class="built" /><rect x="5742" y="0" width="3024" height="1000" class="stair" /><rect x="5742" y="0" width="958" height="1000" class="stairland" /><line x1="6929.555555555556" y1="0" x2="6929.555555555556" y2="1000" class="tread"/><line x1="7159.111111111111" y1="0" x2="7159.111111111111" y2="1000" class="tread"/><line x1="7388.666666666667" y1="0" x2="7388.666666666667" y2="1000" class="tread"/><line x1="7618.222222222223" y1="0" x2="7618.222222222223" y2="1000" class="tread"/><line x1="7847.777777777777" y1="0" x2="7847.777777777777" y2="1000" class="tread"/><line x1="8077.333333333333" y1="0" x2="8077.333333333333" y2="1000" class="tread"/><line x1="8306.888888888889" y1="0" x2="8306.888888888889" y2="1000" class="tread"/><line x1="8536.444444444445" y1="0" x2="8536.444444444445" y2="1000" class="tread"/><line x1="6700" y1="0" x2="6700" y2="1000" class="tread"/><line x1="5742" y1="1000" x2="8766" y2="1000" class="rail"/><text x="7733.0" y="500" class="lbl-sm" text-anchor="middle" dominant-baseline="central">樓梯（不動）</text><text x="6221.0" y="420" class="sub" text-anchor="middle" dominant-baseline="central">平台</text><text x="6221.0" y="620" class="sub" text-anchor="middle" dominant-baseline="central">上下口</text><rect x="7965" y="1066" width="1004" height="115" class="exist" /><text x="8467" y="1300" class="sub-xs" text-anchor="middle" dominant-baseline="central">既有短牆</text><rect x="0" y="0" width="480" height="180" class="col" /><rect x="480" y="0" width="405" height="385" class="col" /><rect x="2795" y="0" width="405" height="255" class="col" /><rect x="4520" y="0" width="405" height="300" class="col" /><rect x="0" y="4120" width="425" height="180" class="col" /><rect x="425" y="3915" width="405" height="385" class="col" /><rect x="2610" y="4060" width="405" height="240" class="col" /><rect x="4095" y="3900" width="405" height="400" class="col" /><rect x="5600" y="4200" width="400" height="100" class="col" /><rect x="2610" y="0" width="100" height="1450" class="wall" /><rect x="2610" y="2250" width="100" height="2050" class="wall" /><rect x="0" y="2350" width="350" height="100" class="wall" /><rect x="1050" y="2350" width="700" height="100" class="wall" /><rect x="2450" y="2350" width="160" height="100" class="wall" /><rect x="1500" y="2450" width="100" height="1850" class="wall" /><line x1="2630.0" y1="1450" x2="2630.0" y2="2050" class="leaf"/><line x1="2690.0" y1="1650" x2="2690.0" y2="2250" class="leaf"/><line x1="350" y1="2370.0" x2="850" y2="2370.0" class="leaf"/><line x1="550" y1="2430.0" x2="1050" y2="2430.0" class="leaf"/><line x1="1750" y1="2450" x2="1750" y2="3150" class="leaf"/><path d="M2450 2450 A700.0 700.0 0 0 1 1750 3150" class="arc"/><rect x="900" y="0" width="1000" height="550" class="furn" /><ellipse cx="1400" cy="300" rx="260" ry="170" class="furnline"/><rect x="1960" y="0" width="650" height="700" class="furn" /><circle cx="2285.0" cy="350.0" r="214.5" class="furnline"/><text x="2285.0" y="350.0" class="sub-xs" text-anchor="middle" dominant-baseline="central">洗/烘疊放</text><line x1="160" y1="800" x2="160" y2="2200" class="drying"/><rect x="1905" y="4120" width="400" height="180" class="furn" /><ellipse cx="2105" cy="3870" rx="185" ry="260" class="furn"/><circle cx="900" cy="3200" r="70" class="furnline"/><rect x="3305.0" y="400" width="1890.0" height="70" class="tv" /><text x="4250" y="630" class="sub" text-anchor="middle" dominant-baseline="central">85 吋電視</text><rect x="2750" y="2770" width="3000" height="1080" rx="90" class="sofa"/><rect x="2950" y="3620" width="2600" height="200" class="sofaback" /><rect x="2965.0" y="2810" width="836.6666666666666" height="770" rx="50" class="cushion"/><rect x="3831.6666666666665" y="2810" width="836.6666666666666" height="770" rx="50" class="cushion"/><rect x="4698.333333333333" y="2810" width="836.6666666666666" height="770" rx="50" class="cushion"/><text x="4250.0" y="3195.0" class="sub" text-anchor="middle" dominant-baseline="central">沙發 300×108</text><rect x="3600" y="1720" width="1300" height="650" rx="40" class="furn"/><text x="4250.0" y="2045.0" class="sub" text-anchor="middle" dominant-baseline="central">茶几</text><rect x="6300" y="2300" width="1400" height="800" rx="40" class="furn"/><text x="7000.0" y="2700.0" class="sub" text-anchor="middle" dominant-baseline="central">餐桌／工作桌 140×80</text><rect x="6560" y="1860" width="430" height="430" rx="70" class="furn"/><rect x="6560" y="3110" width="430" height="430" rx="70" class="furn"/><rect x="7010" y="1860" width="430" height="430" rx="70" class="furn"/><rect x="7010" y="3110" width="430" height="430" rx="70" class="furn"/><text x="1400" y="690" class="sub-xs" text-anchor="middle" dominant-baseline="central">洗手台</text><text x="240" y="1500" class="sub-xs" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 240 1500)">曬衣桿</text><text x="1300" y="1350" class="lbl-sm" text-anchor="middle" dominant-baseline="central">洗衣・洗手・更衣</text><text x="1300" y="1600" class="sub" text-anchor="middle" dominant-baseline="central">（乾區）</text><text x="750" y="2850" class="lbl-sm" text-anchor="middle" dominant-baseline="central">淋浴間</text><text x="620" y="3600" class="sub-xs" text-anchor="middle" dominant-baseline="central">⑥旁做壁龕</text><text x="2105" y="3330" class="lbl-sm" text-anchor="middle" dominant-baseline="central">廁所</text><text x="3900" y="200" class="bi" text-anchor="middle" dominant-baseline="central">電視主牆</text><text x="3550" y="4075" class="bi" text-anchor="middle" dominant-baseline="central">沙發背牆（藏⑦⑧）</text><text x="8669" y="3070" class="bi" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 8669 3070)">電器櫃（原有）</text><text x="3300" y="2560" class="lbl" text-anchor="middle" dominant-baseline="central">客廳</text><text x="7000" y="3850" class="lbl-sm" text-anchor="middle" dominant-baseline="central">餐桌／工作區</text><path d="M6200 1150 L5450 1050 L3000 1050 L2760 1750" class="route" marker-end="url(#arB)"/><g class="warn"><rect x="3500" y="760" width="1500" height="200" rx="100"/><text x="4250" y="866" class="warntxt" text-anchor="middle" dominant-baseline="central">會經過電視前</text></g><path d="M6700 1500 L9300 1500" class="route" marker-end="url(#arB)"/><text x="9350" y="1300" class="route-txt" text-anchor="end" dominant-baseline="central">往後方</text><line x1="0" y1="4820" x2="8969" y2="4820" class="dim"/><line x1="-60" y1="4880" x2="60" y2="4760" class="dimtick"/><line x1="0" y1="4710" x2="0" y2="4930" class="dim"/><line x1="8909" y1="4880" x2="9029" y2="4760" class="dimtick"/><line x1="8969" y1="4710" x2="8969" y2="4930" class="dim"/><text x="4484.5" y="4730" class="dimtxt" text-anchor="middle">897</text><line x1="-620" y1="0" x2="-620" y2="4300" class="dim"/><line x1="-680" y1="60" x2="-560" y2="-60" class="dimtick"/><line x1="-730" y1="0" x2="-510" y2="0" class="dim"/><line x1="-680" y1="4360" x2="-560" y2="4240" class="dimtick"/><line x1="-730" y1="4300" x2="-510" y2="4300" class="dim"/><text x="-710" y="2150.0" class="dimtxt" text-anchor="middle" transform="rotate(-90 -710 2150.0)">430</text><line x1="0" y1="-450" x2="2610" y2="-450" class="dim"/><line x1="-60" y1="-390" x2="60" y2="-510" class="dimtick"/><line x1="0" y1="-560" x2="0" y2="-340" class="dim"/><line x1="2550" y1="-390" x2="2670" y2="-510" class="dimtick"/><line x1="2610" y1="-560" x2="2610" y2="-340" class="dim"/><text x="1305.0" y="-540" class="dimtxt" text-anchor="middle">261</text><text x="-420" y="2075" class="sub" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 -420 2075)">窗（唯一採光面）</text><g class="tag"><circle cx="240.0" cy="90.0" r="120"/><text x="240.0" y="96.0" class="tagtxt" text-anchor="middle" dominant-baseline="central">1</text></g><g class="tag"><circle cx="682.5" cy="192.5" r="120"/><text x="682.5" y="198.5" class="tagtxt" text-anchor="middle" dominant-baseline="central">2</text></g><g class="tag"><circle cx="2997.5" cy="127.5" r="120"/><text x="2997.5" y="133.5" class="tagtxt" text-anchor="middle" dominant-baseline="central">3</text></g><g class="tag"><circle cx="4722.5" cy="150.0" r="120"/><text x="4722.5" y="156.0" class="tagtxt" text-anchor="middle" dominant-baseline="central">4</text></g><g class="tag"><circle cx="212.5" cy="4210.0" r="120"/><text x="212.5" y="4216.0" class="tagtxt" text-anchor="middle" dominant-baseline="central">5</text></g><g class="tag"><circle cx="627.5" cy="4107.5" r="120"/><text x="627.5" y="4113.5" class="tagtxt" text-anchor="middle" dominant-baseline="central">6</text></g><g class="tag"><circle cx="2812.5" cy="4180.0" r="120"/><text x="2812.5" y="4186.0" class="tagtxt" text-anchor="middle" dominant-baseline="central">7</text></g><g class="tag"><circle cx="4297.5" cy="4100.0" r="120"/><text x="4297.5" y="4106.0" class="tagtxt" text-anchor="middle" dominant-baseline="central">8</text></g><g class="tag"><circle cx="5800.0" cy="4250.0" r="120"/><text x="5800.0" y="4256.0" class="tagtxt" text-anchor="middle" dominant-baseline="central">9</text></g><rect x="6900" y="5050" width="1000" height="50" class="sb-dark" /><rect x="7900" y="5050" width="1000" height="50" class="sb-light" /><text x="6900" y="5220" class="dimtxt" text-anchor="middle" dominant-baseline="central">0</text><text x="7900" y="5220" class="dimtxt" text-anchor="middle" dominant-baseline="central">1</text><text x="8900" y="5220" class="dimtxt" text-anchor="middle" dominant-baseline="central">2 m</text></svg></div>
+    <div class="cols">
+      <div>
+        <h3>做法</h3>
+        <ul>
+          <li>左側 261 cm 做濕區，分成三間：上半是洗衣＋洗手＋更衣（乾區），下半左是淋浴間、右是廁所。</li>
+          <li>洗衣乾區和淋浴間都碰到窗，可以自然通風、在窗邊放曬衣桿。</li>
+          <li>客廳上下兩面做櫃牆藏柱：電視主牆藏 3、4 號柱，沙發背牆藏 7、8 號柱。</li>
+          <li>後段保留原本的電器櫃，旁邊放餐桌或工作桌。</li>
+        </ul>
+      </div>
+      <div>
+        <h3>優點</h3>
+        <ul>
+          <li>濕區有窗，通風、採光、排濕最好。</li>
+          <li>廁所和淋浴分開，有人洗澡時另一人還能用廁所。</li>
+          <li>電視和沙發中心對齊，電視貼牆不用懸空。</li>
+        </ul>
+      </div>
+      <div>
+        <h3>缺點</h3>
+        <ul>
+          <li>從樓梯走去濕區會經過電視和沙發之間。</li>
+          <li>客廳沒有窗，需要用玻璃隔間或上方氣窗借光。</li>
+          <li>廁所碰不到窗，要裝抽風。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="plan" aria-labelledby="cmp-title">
+    <h2 id="cmp-title">三個配置比較</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>項目</th><th>你的原始配置</th><th>方案 A</th><th>方案 B</th></tr></thead>
+        <tbody>
+          <tr><td>濕區在左側窗邊</td><td class="yes">是</td><td class="no">否</td><td class="yes">是</td></tr>
+          <tr><td>客廳有窗</td><td>沒有</td><td>有，正對窗</td><td>沒有，可借光</td></tr>
+          <tr><td>走去衛浴經過電視前</td><td>會</td><td>不會</td><td>會</td></tr>
+          <tr><td>電視位置</td><td>離牆約 40 cm 懸空，和沙發中心差約 30 cm</td><td>貼櫃牆，和沙發對齊</td><td>貼櫃牆，和沙發對齊</td></tr>
+          <tr><td>衛浴</td><td>廁所和淋浴同一間，約 3 m²</td><td>三分離，沒有窗</td><td>三分離，淋浴和乾區有窗</td></tr>
+          <tr><td>柱子處理</td><td>大多露在外面</td><td>全部藏進櫃牆</td><td>客廳段藏進櫃牆，濕區內做壁龕</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="plan" aria-labelledby="col-title">
+    <h2 id="col-title">9 根柱子（從你的圖量出來的）</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th class="num">編號</th><th>位置</th><th class="num">寬×凸出（cm）</th><th>方案 A</th><th>方案 B</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td>上牆，窗邊角落</td><td class="num">48×18</td><td>藏進上排櫃</td><td>洗衣乾區角落收納</td></tr>
+          <tr><td class="num">2</td><td>上牆，離窗 48 cm</td><td class="num">40×38.5</td><td>藏進上排櫃</td><td>洗手台旁做鏡櫃</td></tr>
+          <tr><td class="num">3</td><td>上牆，離窗 280 cm</td><td class="num">40×26</td><td>藏進電視主牆</td><td>藏進客廳上排櫃</td></tr>
+          <tr><td class="num">4</td><td>上牆，離窗 452 cm</td><td class="num">40×30</td><td>藏進收納／書櫃</td><td>藏進電視主牆</td></tr>
+          <tr><td class="num">5</td><td>下牆，窗邊角落</td><td class="num">43×18</td><td>臥榻轉角</td><td>淋浴間內</td></tr>
+          <tr><td class="num">6</td><td>下牆，離窗 43 cm</td><td class="num">40×39</td><td>沙發背牆，展示龕左框</td><td>淋浴間內，旁邊做壁龕</td></tr>
+          <tr><td class="num">7</td><td>下牆，離窗 261 cm</td><td class="num">40×24</td><td>沙發背牆，展示龕右框</td><td>藏進沙發背牆</td></tr>
+          <tr><td class="num">8</td><td>下牆，離窗 410 cm</td><td class="num">40×40</td><td>藏在收納櫃與電器櫃之間</td><td>藏進沙發背牆</td></tr>
+          <tr><td class="num">9</td><td>下牆，離窗 560 cm</td><td class="num">40×10</td><td>藏進洗衣間掃具櫃</td><td>只凸出 10 cm，不用處理</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>假設：樓梯上下口在左端平台；上下長牆沒有窗；樓梯右下方那段 100 cm 灰色元素是既有短牆或欄杆。柱子尺寸是從截圖量的，誤差約 ±2 cm。</footer>
+</div>
