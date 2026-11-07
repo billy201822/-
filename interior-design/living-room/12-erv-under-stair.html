@@ -1,0 +1,260 @@
+<title>設備放樓梯下</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap">
+<style>
+/* Layout: the answer first, then the plan with routes, the beam-crossing section, the storage-room section, and what to check. */
+:root {
+  --paper: #F3F4F1; --sheet: #FCFCFA; --stage: #ECEDE9; --ink: #1F2428; --ink-2: #4E575D; --muted: #7D868B; --rule: #D5DAD6;
+  --wood: #EEE3D1; --water: #D9E8EF; --dry: #E4ECEC; --dining: #F2E9DA; --built: #DCDFD9; --feature: #CDBFA6; --sofa: #E2DDD3; --sofa-2: #CFC8BB;
+  --accent: #2456B0; --accent-2: #8A5A1F; --warn: #B4471F; --good: #2E7A58; --mid: #9A6B00;
+  --supply: #2F6FD0; --return: #2E9A60; --exhaust: #D08A10; --outdoor: #8E4FAF; --erv: #D0652A; --dh: #2477AE; --ac: #7B5CB3;
+  --serif: "Noto Serif TC", "Songti TC", serif; --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #121517; --sheet: #191D20; --stage: #1E2326; --ink: #E5E8E6; --ink-2: #B5BCC0; --muted: #8B949A; --rule: #2E3439;
+  --wood: #352D23; --water: #1C3340; --dry: #22302F; --dining: #3A3125; --built: #2A3033; --feature: #574A37; --sofa: #3A3631; --sofa-2: #4A453E;
+  --accent: #8BAEF0; --accent-2: #E0B27A; --warn: #F0956C; --good: #7CC8A2; --mid: #E2C060;
+  --supply: #7FA9F0; --return: #74D1A0; --exhaust: #F0B850; --outdoor: #C79BE0; --erv: #F09A62; --dh: #6FB4E4; --ac: #B79BE8; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --paper: #121517; --sheet: #191D20; --stage: #1E2326; --ink: #E5E8E6; --ink-2: #B5BCC0; --muted: #8B949A; --rule: #2E3439;
+  --wood: #352D23; --water: #1C3340; --dry: #22302F; --dining: #3A3125; --built: #2A3033; --feature: #574A37; --sofa: #3A3631; --sofa-2: #4A453E;
+  --accent: #8BAEF0; --accent-2: #E0B27A; --warn: #F0956C; --good: #7CC8A2; --mid: #E2C060;
+  --supply: #7FA9F0; --return: #74D1A0; --exhaust: #F0B850; --outdoor: #C79BE0; --erv: #F09A62; --dh: #6FB4E4; --ac: #B79BE8; color-scheme: dark; }
+
+:root { --cold: #2F7FC1; --hot: #C8423A; --ret: #C2558B; --soilc: #7A5230; --greyc: #8B7D2A; --refr: #2E8F8F; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --cold: #7FB6E6; --hot: #F08A80; --ret: #E89BC2; --soilc: #C8A07A; --greyc: #D6C46A; --refr: #7FD0D0; } }
+:root[data-theme="dark"] { --cold: #7FB6E6; --hot: #F08A80; --ret: #E89BC2; --soilc: #C8A07A; --greyc: #D6C46A; --refr: #7FD0D0; }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.7; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 36px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 40px; }
+h1, h2 { font-family: var(--serif); text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.2; }
+h2 { font-size: 21px; line-height: 1.3; }
+h3 { font-size: 16px; margin: 6px 0 0; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; color: var(--accent-2); }
+.cover { display: grid; gap: 12px; border-bottom: 2px solid var(--ink); padding-bottom: 20px; }
+.lede { max-width: 70ch; color: var(--ink-2); margin: 0; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 0; }
+.facts div { display: grid; } .facts dt { font-size: 12px; color: var(--muted); } .facts dd { margin: 0; font-family: var(--mono); font-size: 14px; }
+.sheet { display: grid; gap: 16px; background: var(--sheet); border: 1px solid var(--rule); padding: 18px; min-width: 0; }
+.tb { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; border-bottom: 1px solid var(--ink); padding-bottom: 10px; }
+.tb .code { font-family: var(--mono); font-weight: 600; font-size: 15px; color: var(--sheet); background: var(--ink); padding: 1px 10px; }
+.tb .meta { margin-left: auto; font-size: 12px; color: var(--muted); }
+.figs { display: flex; flex-wrap: wrap; gap: 18px; }
+.fig { margin: 0; display: grid; gap: 6px; flex: 1 1 360px; min-width: 0; }
+.fig.wide { flex-basis: 100%; }
+.fig figcaption { font-size: 13px; color: var(--ink-2); }
+.dwgwrap { overflow-x: auto; border: 1px solid var(--rule); background: var(--sheet); }
+.dwgwrap svg { display: block; width: 100%; height: auto; }
+.fig.wide .dwgwrap svg { min-width: 780px; }
+.fig:not(.wide) .dwgwrap svg { min-width: 320px; max-height: 620px; }
+.tblwrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 640px; }
+th, td { border-bottom: 1px solid var(--rule); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { font-weight: 600; color: var(--ink-2); background: var(--stage); }
+td:first-child { font-family: var(--mono); font-size: 13px; }
+.notes { margin: 0; padding-left: 1.4em; display: grid; gap: 4px; color: var(--ink-2); font-size: 14px; max-width: 90ch; }
+.twocol { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px 36px; }
+.index { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.index a { color: var(--ink); text-decoration: none; display: flex; gap: 12px; border-bottom: 1px dotted var(--rule); padding: 3px 0; }
+.index a:hover, .index a:focus-visible { color: var(--accent); outline: none; }
+.index .code { font-family: var(--mono); color: var(--accent); min-width: 48px; }
+.legend { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 6px 14px; font-size: 13px; }
+.legend li { display: flex; align-items: center; gap: 8px; }
+.legend i { width: 26px; height: 4px; display: inline-block; }
+.legend i.dashed { height: 0; border-top: 3px dashed; }
+footer { color: var(--muted); font-size: 13px; max-width: 80ch; }
+@media (max-width: 560px) { .sheet { padding: 12px; } .tb .meta { margin-left: 0; } }
+/* drafting classes (cad) */
+.cad * { vector-effect: non-scaling-stroke; }
+.cad text { font-family: var(--sans); }
+.cad .floor { fill: var(--sheet); } .cad .hall { fill: var(--stage); }
+.cad .wallcut, .cad .slabcut { fill: url(#conc); stroke: var(--ink); stroke-width: 1.2; }
+.cad .concbg { fill: var(--built); } .cad .concdot { fill: var(--ink-2); }
+.cad .mullion { fill: var(--ink-2); }
+.cad .glassfill { fill: var(--water); } .cad .glass { stroke: var(--accent); stroke-width: 1; } .cad .glass.dash { stroke-dasharray: 6 4; }
+.cad .colcut { fill: var(--ink); }
+.cad .void { fill: var(--stage); stroke: var(--ink-2); stroke-width: 1; }
+.cad .thin { stroke: var(--ink-2); stroke-width: .7; fill: none; }
+.cad .arrow { stroke: var(--accent-2); stroke-width: 1.6; fill: none; } .cad .arrowhead { fill: var(--accent-2); }
+.cad .brick { fill: url(#brick); stroke: var(--ink); stroke-width: 1.2; } .cad .brickbg { fill: var(--sheet); } .cad .hatch { stroke: var(--ink-2); stroke-width: .6; }
+.cad .door { fill: var(--sheet); stroke: var(--ink); stroke-width: 1; } .cad .doorpark { fill: none; stroke: var(--ink-2); stroke-dasharray: 5 4; stroke-width: .8; }
+.cad .glasswall { fill: var(--water); stroke: var(--accent); stroke-width: 1; }
+.cad .swing { fill: none; stroke: var(--ink-2); stroke-width: .7; stroke-dasharray: 4 3; } .cad .door2 { stroke: var(--ink); stroke-width: 1.2; }
+.cad .halfwall { fill: var(--ink-2); stroke: var(--accent); stroke-width: 1; }
+.cad .fx { fill: var(--sheet); stroke: var(--ink); stroke-width: .9; } .cad .fx2 { fill: none; stroke: var(--ink-2); stroke-width: .7; }
+.cad .chase { fill: none; stroke: var(--warn); stroke-dasharray: 4 3; stroke-width: .8; }
+.cad .drain { fill: var(--sheet); stroke: var(--ink); stroke-width: 1.2; }
+.cad .trench { fill: var(--ink-2); }
+.cad .tvwall { fill: var(--feature); stroke: var(--ink); stroke-width: .9; } .cad .tv { fill: var(--ink); }
+.cad .fxdash { fill: none; stroke: var(--ink-2); stroke-dasharray: 6 4; stroke-width: .8; }
+.cad .cab { fill: var(--built); stroke: var(--ink); stroke-width: .9; }
+.cad .riser { fill: var(--muted); stroke: var(--ink); stroke-width: 1; }
+.cad .ctag { fill: var(--sheet); stroke: var(--accent-2); stroke-width: 1.2; } .cad .ctagt { fill: var(--accent-2); font-family: var(--mono); font-weight: 600; }
+.cad .room { fill: var(--ink); font-weight: 700; }
+.cad .t, .cad .tsm { fill: var(--ink); } .cad .tsmw { fill: var(--sheet); } .cad .tsmA { fill: var(--warn); font-weight: 600; }
+.cad .emk { fill: var(--ink); } .cad .emkc { fill: var(--sheet); stroke: var(--ink); stroke-width: 1.2; } .cad .emkt { fill: var(--ink); font-family: var(--mono); font-weight: 600; }
+.cad .dim { stroke: var(--accent); stroke-width: .8; } .cad .dimtk { stroke: var(--accent); stroke-width: 1.4; }
+.cad .ext { stroke: var(--accent); stroke-width: .5; opacity: .6; } .cad .dimt { fill: var(--accent); font-family: var(--mono); font-weight: 500; }
+.cad .wetz { fill: url(#wet); } .cad .wetbg { fill: var(--water); } .cad .wethatch { stroke: var(--accent); stroke-width: .4; opacity: .5; }
+.cad .wetz2 { fill: var(--water); } .cad .wetz3 { fill: var(--water); stroke: var(--accent); stroke-width: .6; }
+.cad .stop { fill: var(--warn); } .cad .wp { fill: none; stroke: var(--warn); stroke-width: 1; stroke-dasharray: 8 5; }
+.cad .wp2 { fill: none; stroke: var(--warn); stroke-width: 1.6; stroke-dasharray: 2 3; }
+.cad .slopehead { fill: var(--accent); }
+.cad .slope { stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 10 6; fill: none; }
+.cad .lvl { fill: var(--ink); } .cad .lvlln { stroke: var(--ink); stroke-width: .8; } .cad .lvlt { fill: var(--ink); font-family: var(--mono); font-weight: 600; }
+.cad .cold { fill: none; stroke: var(--cold); stroke-width: 2; } .cad .hot { fill: none; stroke: var(--hot); stroke-width: 2; }
+.cad .ret { fill: none; stroke: var(--ret); stroke-width: 1.5; stroke-dasharray: 6 4; }
+.cad .soil { fill: none; stroke: var(--soilc); stroke-width: 3; } .cad .grey { fill: none; stroke: var(--greyc); stroke-width: 2.4; }
+.cad .grey2 { fill: none; stroke: var(--soilc); stroke-width: 2; stroke-dasharray: 8 4; }
+.cad .wpt { fill: var(--sheet); stroke: var(--accent); stroke-width: 1.2; } .cad .wptt { fill: var(--ink); font-family: var(--mono); font-weight: 600; }
+.cad .eo { fill: var(--sheet); stroke: var(--accent-2); stroke-width: 1.2; } .cad .eoln { stroke: var(--accent-2); stroke-width: 1; }
+.cad .ex { fill: var(--sheet); stroke: var(--accent-2); stroke-width: 1.2; } .cad .edata { fill: var(--accent-2); } .cad .epanel { fill: var(--accent-2); }
+.cad .es { fill: var(--accent-2); font-weight: 700; } .cad .eh { fill: var(--sheet); stroke: var(--good); stroke-width: 1.2; }
+.cad .ldr { stroke: var(--ink-2); stroke-width: .7; } .cad .dot { fill: var(--ink-2); }
+.cad .floorln { stroke: var(--ink); stroke-width: 1.6; } .cad .ceil { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 10 5; }
+.cad .feature { fill: var(--feature); fill-opacity: .55; stroke: var(--ink); stroke-width: 1; }
+.cad .hidden { fill: none; stroke: var(--muted); stroke-width: .8; stroke-dasharray: 6 4; }
+.cad .arch { fill: var(--sheet); fill-opacity: .6; stroke: var(--ink-2); stroke-width: .9; }
+.cad .tvel { fill: var(--ink); } .cad .cabel { fill: var(--built); stroke: var(--ink); stroke-width: .9; }
+.cad .bulk { fill: var(--stage); stroke: var(--ink); stroke-width: .9; }
+.cad .grille { fill: var(--sheet); stroke: var(--supply); stroke-width: 1.2; }
+.cad .cove { fill: var(--mid); fill-opacity: .6; }
+.cad .outlet { fill: var(--sheet); stroke: var(--accent-2); stroke-width: 1.2; }
+.cad .conduit { stroke: var(--accent-2); stroke-width: 1; stroke-dasharray: 4 3; }
+.cad .wallel { fill: var(--sheet); stroke: var(--ink); stroke-width: .9; }
+.cad .moulding { fill: none; stroke: var(--ink-2); stroke-width: 1; }
+.cad .frame { fill: var(--feature); stroke: var(--ink); stroke-width: .8; }
+.cad .frost { fill: var(--water); fill-opacity: .55; stroke: var(--ink-2); stroke-width: .6; }
+.cad .header { fill: var(--feature); stroke: var(--ink); stroke-width: .9; } .cad .band { fill: var(--built); stroke: var(--ink); stroke-width: .9; }
+.cad .stone { fill: var(--ink-2); stroke: var(--ink); stroke-width: .6; }
+.cad .colface { fill: var(--rule); stroke: var(--ink); stroke-width: .9; }
+.cad .niche { fill: var(--stage); stroke: var(--ink-2); stroke-width: .8; } .cad .art { fill: var(--sofa-2); stroke: var(--ink-2); stroke-width: .6; }
+.cad .sofadash { fill: none; stroke: var(--ink-2); stroke-dasharray: 8 5; stroke-width: .8; }
+.cad .fxel { fill: var(--sheet); stroke: var(--ink); stroke-width: 1; } .cad .tray { fill: var(--muted); }
+.cad .mirrorpl { fill: var(--water); stroke: var(--accent); stroke-width: 1; }
+.cad .tilewall { fill: var(--water); fill-opacity: .45; stroke: var(--ink); stroke-width: .9; }
+.cad .mixer { fill: var(--ink-2); stroke: var(--ink); stroke-width: .8; }
+.cad .mirror { fill: var(--water); fill-opacity: .6; stroke: var(--ink); stroke-width: .9; }
+.cad .greypt { fill: var(--greyc); } .cad .soilpt { fill: var(--soilc); }
+.cad .winel { fill: var(--water); stroke: var(--accent); stroke-width: 1; }
+.cad .winfrost { fill: var(--water); fill-opacity: .5; stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 2; }
+.cad .louver { fill: var(--muted); fill-opacity: .55; stroke: var(--ink); stroke-width: .8; }
+.cad .panel { fill: var(--feature); stroke: var(--ink); stroke-width: .8; } .cad .pull { fill: var(--accent-2); }
+.cad .steel { fill: var(--ink-2); stroke: var(--ink); stroke-width: .8; } .cad .rod { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 2; }
+.cad .track { fill: var(--muted); stroke: var(--ink); stroke-width: .6; }
+.cad .wood { fill: var(--wood); stroke: var(--ink); stroke-width: .6; } .cad .screed { fill: var(--rule); stroke: var(--ink-2); stroke-width: .4; }
+.cad .tile { fill: var(--water); stroke: var(--ink); stroke-width: .6; }
+.cad .stopc { fill: var(--warn); fill-opacity: .85; } .cad .wpln { fill: none; stroke: var(--warn); stroke-width: 2; }
+.cad .gap { fill: var(--accent); } .cad .guide { fill: var(--ink); } .cad .ply { fill: var(--feature); stroke: var(--ink); stroke-width: .6; }
+.cad .ductx { fill: var(--exhaust); fill-opacity: .7; stroke: var(--ink); stroke-width: .6; } .cad .ducts { fill: var(--supply); fill-opacity: .6; stroke: var(--ink); stroke-width: .6; }
+.cad .facade { fill: var(--sheet); stroke: var(--ink); stroke-width: 1; } .cad .flr { fill: var(--ink); font-family: var(--mono); font-weight: 600; }
+.cad .ground { fill: var(--rule); }
+.cad .clad, .cad .clad2 { fill: var(--muted); fill-opacity: .22; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 8 4; }
+.cad .heater { fill: var(--hot); fill-opacity: .15; stroke: var(--hot); stroke-width: 1.2; } .cad .pump { fill: var(--ret); fill-opacity: .2; stroke: var(--ret); stroke-width: 1.2; }
+.cad .co { fill: var(--sheet); stroke: var(--ink); stroke-width: 1.2; } .cad .cot { fill: var(--ink); font-family: var(--mono); font-weight: 600; }
+.cad .acu { fill: var(--sheet); stroke: var(--ink); stroke-width: 1; } .cad .refr { fill: none; stroke: var(--refr); stroke-width: 1.6; stroke-dasharray: 10 4; }
+.cad .cladsec { fill: var(--stage); stroke: var(--ink); stroke-width: 1; }
+.cad .insulc { fill: url(#insul); stroke: var(--ink-2); stroke-width: .6; } .cad .insulbg { fill: var(--sheet); } .cad .insulln { fill: none; stroke: var(--mid); stroke-width: .6; }
+.cad .hotpt { fill: var(--hot); } .cad .retpt { fill: var(--ret); } .cad .coldpt { fill: var(--cold); }
+.cad .pipe4 { fill: var(--soilc); } .cad .sleeve { fill: none; stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 4 2; }
+.cad .soilfat { fill: none; stroke: var(--soilc); stroke-width: 5; } .cad .greyfat { fill: none; stroke: var(--greyc); stroke-width: 5; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+
+/* 3D viewer */
+.toggle { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; color: var(--ink-2); cursor: pointer; }
+.toggle input { accent-color: var(--accent); width: 16px; height: 16px; }
+.vbtn { font: inherit; font-size: 14px; border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); padding: 6px 14px; border-radius: 6px; cursor: pointer; }
+.vbtn:hover { border-color: var(--accent); }
+.vbtn:focus-visible, .toggle input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.vbtn[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.viewer-bar { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.viewer-bar .grp { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.viewer-bar .lab { font-size: 12px; color: var(--muted); margin-right: 4px; }
+.stage-wrap { position: relative; border: 1px solid var(--rule); background: var(--stage); height: clamp(360px, 66vh, 640px); overflow: hidden; }
+#stage { position: absolute; inset: 0; }
+#stage canvas { display: block; touch-action: none; }
+#stage-labels { position: absolute; inset: 0; pointer-events: none; }
+.stage-label { position: absolute; left: 0; top: 0; font-size: 12px; font-weight: 700; color: #1F2428; background: rgba(255,255,255,.82); padding: 1px 7px; border-radius: 4px; white-space: nowrap; }
+#stage-note { position: absolute; inset: auto 16px 16px 16px; color: var(--ink-2); font-size: 14px; }
+#stage-caption { position: absolute; left: 12px; top: 10px; font-weight: 700; font-size: 14px; color: var(--ink); background: var(--sheet); padding: 2px 10px; border-radius: 4px; border: 1px solid var(--rule); }
+.hint { font-size: 13px; color: var(--muted); margin: 0; }
+
+
+.cad .beam { fill: var(--warn); fill-opacity: .08; stroke: var(--warn); stroke-width: 1; stroke-dasharray: 6 5; }
+.cad .d-sa { fill: none; stroke: var(--supply); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.cad .d-ra { fill: none; stroke: var(--outdoor); stroke-width: 4; stroke-dasharray: 8 6; stroke-linecap: round; }
+.cad .d-oa { fill: none; stroke: var(--return); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.cad .d-oa-c { fill: none; stroke: var(--return); stroke-width: 3; }
+.cad .d-ea { fill: none; stroke: var(--exhaust); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.cad .d-flat { fill: none; stroke: var(--exhaust); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.cad .d-b { fill: none; stroke: var(--warn); stroke-width: 4; stroke-dasharray: 10 7; stroke-linecap: round; }
+.cad .d-cond { stroke: var(--cold); stroke-width: 2; stroke-dasharray: 5 4; }
+.cad .warnpt { fill: var(--warn); fill-opacity: .25; stroke: var(--warn); stroke-width: 1.5; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0; padding: 0; list-style: none; font-size: 13px; color: var(--ink-2); }
+.legend i { display: inline-block; width: 26px; height: 0; border-top: 4px solid; vertical-align: middle; margin-right: 6px; }
+.pts { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.verdict { border-left: 4px solid var(--good); padding: 10px 16px; background: var(--stage); display: grid; gap: 6px; }
+.verdict p { margin: 0; }
+
+</style>
+<div class="wrap">
+  <header class="cover">
+    <div class="eyebrow">透天 2F・除濕機＋全熱交換器放樓梯下儲藏室・2026-11-07</div>
+    <h1>設備放樓梯下：好位置，但排風別拉到洗衣間</h1>
+    <p class="lede">把除濕機和全熱交換器集中在樓梯下的儲藏室，牆上開洞直接送風到客廳和主臥，客廳天花完全不用走管，2600 守得住。唯一要改的是全熱的「排風」：如果照原本拉到洗衣間的窗，要從東到西穿過整個客廳、跨過至少 3 根梁，每根梁都會降 18 公分。建議新風和排風都改從前面外牆（主臥那側）出入，管子只走主臥的衣櫃上方和牆邊。</p>
+    <dl class="facts"><div><dt>風管</dt><dd>Ø16（約 Ø160）</dd></div><div><dt>過梁降</dt><dd>18–20 公分</dd></div><div><dt>客廳天花</dt><dd>2600 不受影響（A 案）</dd></div><div><dt>設備</dt><dd>儲藏室南端高處</dd></div></dl>
+  </header>
+  <section class="sheet" id="plan" aria-labelledby="plan-t">
+    <div class="tb"><span class="code">01</span><h2 id="plan-t">設備和風管怎麼走</h2><span class="meta">梁位依柱位推估，開工前實測</span></div>
+    <ul class="legend"><li><i style="border-color:var(--supply)"></i>送風（除濕＋新風）</li><li><i style="border-color:var(--outdoor);border-top-style:dashed"></i>回風</li><li><i style="border-color:var(--return)"></i>新風進（室外→全熱）</li><li><i style="border-color:var(--exhaust)"></i>排風出（全熱→室外）</li><li><i style="border-color:var(--warn);border-top-style:dashed"></i>B 案：排風拉到洗衣間</li></ul>
+    <div class="figs"><figure class="fig wide"><div class="dwgwrap"><svg viewBox="-500 -800 17900 6500" class="dwg cad " role="img" aria-label="2F 平面：設備位置與風管路線" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="brick" width="70" height="70" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="70" height="70" class="brickbg"/><line x1="0" y1="0" x2="0" y2="70" class="hatch"/></pattern><pattern id="conc" width="60" height="60" patternUnits="userSpaceOnUse"><rect width="60" height="60" class="concbg"/><circle cx="15" cy="20" r="4" class="concdot"/><circle cx="42" cy="44" r="3" class="concdot"/></pattern><pattern id="wet" width="120" height="120" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><rect width="120" height="120" class="wetbg"/><line x1="0" y1="0" x2="0" y2="120" class="wethatch"/></pattern><pattern id="insul" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" class="insulbg"/><path d="M0 20 Q10 0 20 20 T40 20" class="insulln"/></pattern></defs><rect x="-200" y="-200" width="17270" height="200" class="wallcut"/><rect x="-200" y="4300" width="17270" height="200" class="wallcut"/><rect x="-200" y="0" width="200" height="4300" class="wallcut"/><rect x="16870" y="0" width="200" height="4300" class="wallcut"/><rect x="0" y="0" width="2657" height="4300" class="floor"/><rect x="2895" y="0" width="7070" height="4300" class="floor"/><rect x="9914" y="0" width="1714" height="1845" class="hall"/><rect x="11873" y="0" width="4997" height="4300" class="floor"/><rect x="0" y="2750" width="2657" height="100" class="brick"/><rect x="2657" y="0" width="238" height="382" class="brick"/><rect x="2657" y="1865" width="238" height="2435" class="brick"/><rect x="9965" y="1845" width="201" height="2455" class="brick"/><rect x="11628" y="778" width="245" height="3522" class="brick"/><rect x="10166" y="1845" width="1462" height="2432" class="void"/><line x1="10656" y1="1852.2" x2="11628" y2="1852.2" class="thin"/><line x1="10656" y1="2054.3" x2="11628" y2="2054.3" class="thin"/><line x1="10656" y1="2256.4" x2="11628" y2="2256.4" class="thin"/><line x1="10656" y1="2458.4" x2="11628" y2="2458.4" class="thin"/><line x1="10656" y1="2660.5" x2="11628" y2="2660.5" class="thin"/><line x1="10656" y1="2862.6" x2="11628" y2="2862.6" class="thin"/><line x1="10656" y1="3064.6" x2="11628" y2="3064.6" class="thin"/><line x1="10656" y1="3266.7" x2="11628" y2="3266.7" class="thin"/><line x1="10656" y1="3468.8" x2="11628" y2="3468.8" class="thin"/><line x1="10656" y1="3670.8" x2="11628" y2="3670.8" class="thin"/><line x1="10656" y1="3872.9" x2="11628" y2="3872.9" class="thin"/><line x1="10656" y1="4074.9" x2="11628" y2="4074.9" class="thin"/><rect x="7229" y="0" width="2685" height="1008" class="void"/><text x="1330" y="1500" class="tsm" text-anchor="middle" font-size="230">洗衣洗手</text><text x="1330" y="3600" class="tsm" text-anchor="middle" font-size="230">浴室</text><text x="5200" y="2300" class="room" text-anchor="middle" font-size="280">客廳（天花 2600）</text><text x="8600" y="520" class="tsm" text-anchor="middle" font-size="200">樓梯（一樓上來）</text><text x="10800" y="900" class="tsm" text-anchor="middle" font-size="230">走廊</text><text x="14400" y="2300" class="room" text-anchor="middle" font-size="280">主臥</text><rect x="11886" y="902" width="555" height="3375" class="cab"/><text x="12163" y="2600" class="tsm" text-anchor="middle" font-size="200" transform="rotate(-90 12163 2600)">衣櫃 2400 高</text><rect x="10200" y="3480" width="1400" height="770" class="ex"/><text x="10900" y="3800" class="es" text-anchor="middle" font-size="200">除濕機</text><text x="10900" y="4100" class="es" text-anchor="middle" font-size="200">全熱交換器</text><text x="10850" y="2350" class="tsm" text-anchor="middle" font-size="200">樓梯下</text><text x="10850" y="2600" class="tsm" text-anchor="middle" font-size="200">儲藏室</text><rect x="2700" y="0" width="300" height="4300" class="beam"/><rect x="4095" y="0" width="830" height="4300" class="beam"/><rect x="5600" y="0" width="858" height="4300" class="beam"/><text x="4510" y="-300" class="tsmA" text-anchor="middle" font-size="200">梁位（依柱位推估，要實測）</text><path d="M10200 3000 L9965 3000 L8200 3000" class="d-sa"/><path d="M8200 2850 L7900 3000 L8200 3150" class="d-sa"/><text x="8900" y="2780" class="tsm" text-anchor="middle" font-size="200">送風（穿牆，往西吹）</text><path d="M11600 3100 L12600 3100 L13600 3100" class="d-sa"/><text x="13300" y="2900" class="tsm" text-anchor="middle" font-size="200">送風到主臥</text><path d="M11420 3480 L11420 1845 L11420 1500" class="d-ra"/><text x="11300" y="1450" class="tsm" text-anchor="end" font-size="200">回風（走廊）</text><path d="M11600 3700 L12300 3700 L12300 300 L16870 300" class="d-oa"/><text x="15000" y="220" class="tsm" text-anchor="middle" font-size="200">A 新風進：前面外牆</text><path d="M11600 4000 L12350 4000 L12350 4050 L16870 4050" class="d-ea"/><text x="15000" y="3950" class="tsm" text-anchor="middle" font-size="200">A 排風出：前面外牆</text><path d="M10200 4150 L9965 4150 L0 4150" class="d-b"/><text x="1400" y="4020" class="tsmA" text-anchor="middle" font-size="200">B 排風拉到洗衣間窗</text><circle cx="2850" cy="4150" r="90" class="warnpt"/><circle cx="4510" cy="4150" r="90" class="warnpt"/><circle cx="6030" cy="4150" r="90" class="warnpt"/><line x1="-124.2" y1="4900" x2="16994.2" y2="4900" class="dim"/><line x1="-80.5" y1="4980.5" x2="80.5" y2="4819.5" class="dimtk"/><line x1="0" y1="4300" x2="0" y2="4817.2" class="ext"/><line x1="2576.5" y1="4980.5" x2="2737.5" y2="4819.5" class="dimtk"/><line x1="2657" y1="4300" x2="2657" y2="4817.2" class="ext"/><line x1="2814.5" y1="4980.5" x2="2975.5" y2="4819.5" class="dimtk"/><line x1="2895" y1="4300" x2="2895" y2="4817.2" class="ext"/><line x1="9884.5" y1="4980.5" x2="10045.5" y2="4819.5" class="dimtk"/><line x1="9965" y1="4300" x2="9965" y2="4817.2" class="ext"/><line x1="10085.5" y1="4980.5" x2="10246.5" y2="4819.5" class="dimtk"/><line x1="10166" y1="4300" x2="10166" y2="4817.2" class="ext"/><line x1="11547.5" y1="4980.5" x2="11708.5" y2="4819.5" class="dimtk"/><line x1="11628" y1="4300" x2="11628" y2="4817.2" class="ext"/><line x1="11792.5" y1="4980.5" x2="11953.5" y2="4819.5" class="dimtk"/><line x1="11873" y1="4300" x2="11873" y2="4817.2" class="ext"/><line x1="16789.5" y1="4980.5" x2="16950.5" y2="4819.5" class="dimtk"/><line x1="16870" y1="4300" x2="16870" y2="4817.2" class="ext"/><text x="1328.5" y="5117.4" class="dimt" text-anchor="middle" font-size="207">2657</text><text x="2776" y="5334.7" class="dimt" text-anchor="middle" font-size="207">238</text><text x="6430" y="5117.4" class="dimt" text-anchor="middle" font-size="207">7070</text><text x="10065.5" y="5334.7" class="dimt" text-anchor="middle" font-size="207">201</text><text x="10897" y="5117.4" class="dimt" text-anchor="middle" font-size="207">1462</text><text x="11750.5" y="5334.7" class="dimt" text-anchor="middle" font-size="207">245</text><text x="14371.5" y="5117.4" class="dimt" text-anchor="middle" font-size="207">4997</text></svg></div><figcaption>2F 平面：儲藏室在客廳和主臥中間，兩邊都只要穿一道牆</figcaption></figure></div>
+    <ol class="pts">
+      <li><strong>送風到客廳</strong>：儲藏室西牆就是客廳東牆（廁所那道牆）。牆上開洞、短短一段管接到客廳東牆高處的出風口（約 2350–2550 高），往西吹 7 公尺。客廳天花裡沒有任何風管。</li>
+      <li><strong>送風到主臥</strong>：儲藏室東牆就是主臥西牆。穿牆後走在衣櫃頂上（衣櫃 2400），接到主臥天花的出風口。</li>
+      <li><strong>回風</strong>：從走廊進儲藏室（門上百葉或牆上回風口），除濕機吸走廊的空氣。浴室和洗衣間維持自己的排風扇往後面窗戶排，不靠全熱。</li>
+      <li><strong>新風和排風（A 案，建議）</strong>：兩支管都穿東牆到主臥，沿衣櫃頂再分別順著北、南兩面牆到前面外牆。新風口在北端、排風口在南端，相距約 3.7 公尺，不會吸回自己排出去的空氣。</li>
+      <li><strong>B 案（照原本排到洗衣間）</strong>：排風要從儲藏室一路往西走 10 公尺到洗衣間的窗，穿過整個客廳，至少跨 3 根梁（紅點）。不建議。</li>
+      <li><strong>串接</strong>：全熱的新風可以先接進除濕機的回風口，再由除濕機一起送出去，這樣到客廳、主臥各只要一支送風管。</li>
+    </ol>
+  </section>
+  <section class="sheet" id="beam" aria-labelledby="beam-t">
+    <div class="tb"><span class="code">02</span><h2 id="beam-t">廠商說的「遇梁降 18」</h2></div>
+    <div class="figs"><figure class="fig wide"><div class="dwgwrap"><svg viewBox="-300 -3150 8000 1550" class="dwg cad " role="img" aria-label="剖面：風管過梁" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="brick" width="70" height="70" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="70" height="70" class="brickbg"/><line x1="0" y1="0" x2="0" y2="70" class="hatch"/></pattern><pattern id="conc" width="60" height="60" patternUnits="userSpaceOnUse"><rect width="60" height="60" class="concbg"/><circle cx="15" cy="20" r="4" class="concdot"/><circle cx="42" cy="44" r="3" class="concdot"/></pattern><pattern id="wet" width="120" height="120" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><rect width="120" height="120" class="wetbg"/><line x1="0" y1="0" x2="0" y2="120" class="wethatch"/></pattern><pattern id="insul" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" class="insulbg"/><path d="M0 20 Q10 0 20 20 T40 20" class="insulln"/></pattern></defs><rect x="-100" y="-3000" width="2400" height="150" class="slabcut"/><rect x="800" y="-2850" width="500" height="450" class="slabcut"/><line x1="-100" y1="-2600" x2="800" y2="-2600" class="floorln"/><line x1="1300" y1="-2600" x2="2300" y2="-2600" class="floorln"/><text x="1050" y="-2600" class="tsm" text-anchor="middle" font-size="80">梁</text><text x="2250" y="-2520" class="tsm" text-anchor="end" font-size="60">天花 2600</text><rect x="2500" y="-3000" width="2400" height="150" class="slabcut"/><rect x="3400" y="-2850" width="500" height="450" class="slabcut"/><line x1="2500" y1="-2600" x2="3400" y2="-2600" class="floorln"/><line x1="3900" y1="-2600" x2="4900" y2="-2600" class="floorln"/><text x="3650" y="-2600" class="tsm" text-anchor="middle" font-size="80">梁</text><text x="4850" y="-2520" class="tsm" text-anchor="end" font-size="60">天花 2600</text><rect x="5100" y="-3000" width="2400" height="150" class="slabcut"/><rect x="6000" y="-2850" width="500" height="450" class="slabcut"/><line x1="5100" y1="-2600" x2="6000" y2="-2600" class="floorln"/><line x1="6500" y1="-2600" x2="7500" y2="-2600" class="floorln"/><text x="6250" y="-2600" class="tsm" text-anchor="middle" font-size="80">梁</text><text x="7450" y="-2520" class="tsm" text-anchor="end" font-size="60">天花 2600</text><path d="M-100 -2700 L500 -2700 L800 -2300 L1300 -2300 L1600 -2700 L2300 -2700" class="d-ea"/><rect x="700" y="-2400" width="700" height="200" class="bulk"/><text x="1050" y="-2080" class="tsmA" text-anchor="middle" font-size="72">這段天花降到約 2200</text><line x1="1520" y1="-2443.2" x2="1520" y2="-2156.8" class="dim"/><line x1="1492" y1="-2372" x2="1548" y2="-2428" class="dimtk"/><line x1="1400" y1="-2400" x2="1491.2" y2="-2400" class="ext"/><line x1="1492" y1="-2172" x2="1548" y2="-2228" class="dimtk"/><line x1="1400" y1="-2200" x2="1491.2" y2="-2200" class="ext"/><text x="1595.6" y="-2300" class="dimt" text-anchor="middle" font-size="72" transform="rotate(-90 1595.6 -2300)">18–20</text><text x="1100" y="-1820" class="tsm" text-anchor="middle" font-size="84">① 圓管 Ø16 從梁下繞</text><text x="1100" y="-1700" class="tsm" text-anchor="middle" font-size="72">（廠商說的「降 18」）</text><path d="M2500 -2700 L3100 -2700 L3400 -2350 L3900 -2350 L4200 -2700 L4900 -2700" class="d-flat"/><rect x="3300" y="-2400" width="700" height="110" class="bulk"/><text x="3650" y="-2160" class="tsmA" text-anchor="middle" font-size="72">這段天花約 2290</text><line x1="4120" y1="-2443.2" x2="4120" y2="-2246.8" class="dim"/><line x1="4092" y1="-2372" x2="4148" y2="-2428" class="dimtk"/><line x1="4000" y1="-2400" x2="4091.2" y2="-2400" class="ext"/><line x1="4092" y1="-2262" x2="4148" y2="-2318" class="dimtk"/><line x1="4000" y1="-2290" x2="4091.2" y2="-2290" class="ext"/><text x="4195.6" y="-2345" class="dimt" text-anchor="middle" font-size="72" transform="rotate(-90 4195.6 -2345)">約 11</text><text x="3700" y="-1820" class="tsm" text-anchor="middle" font-size="84">② 過梁那段換扁管（高約 9）</text><text x="3700" y="-1700" class="tsm" text-anchor="middle" font-size="72">斷面積跟 Ø16 差不多</text><circle cx="5600" cy="-2720" r="80" class="d-oa-c"/><circle cx="6900" cy="-2720" r="80" class="d-oa-c"/><text x="6300" y="-1820" class="tsm" text-anchor="middle" font-size="84">③ 管子順著梁走、不橫過梁</text><text x="6300" y="-1700" class="tsm" text-anchor="middle" font-size="72">天花不用降</text><text x="-50" y="-3060" class="tsm" text-anchor="start" font-size="64">版底約 2850（要實測），梁底假設 2400</text></svg></div><figcaption>三種過梁方式：①圓管從梁下繞 ②換扁管 ③順著梁走</figcaption></figure></div>
+    <ol class="pts">
+      <li><strong>降 18 是合理的</strong>：Ø16 的管從梁底下繞過去，管子本身 16 公分，加吊架和保溫約 2 公分，所以梁底下要多 18 公分。外面再包板，實際天花會在<strong>梁底再往下約 20 公分</strong>。如果梁底是 2400，那一段天花就是 2200 左右。廠商說的「繞梁」應該就是這種用兩個彎頭從梁下繞過去的做法（有的叫鵝頸彎）。</li>
+      <li><strong>可以少降一點</strong>：只有過梁那一小段改用扁管（高約 9 公分、斷面積跟 Ø16 差不多），降的高度可以從 18 減到約 11。扁管風阻比較大，只用在過梁那 1 公尺左右。</li>
+      <li><strong>不要在梁上打洞</strong>：現有 RC 梁穿孔要結構技師評估，一般不建議。</li>
+      <li><strong>最好的方式是不要橫過梁</strong>：A 案的管子在主臥是順著牆走（梁通常也是沿牆和柱位），能不跨就不跨；真的要跨，也只在衣櫃上方或牆邊那條，降板藏在衣櫃頂或窗簾盒裡，看不出來。</li>
+    </ol>
+  </section>
+  <section class="sheet" id="store" aria-labelledby="store-t">
+    <div class="tb"><span class="code">03</span><h2 id="store-t">儲藏室裡怎麼放</h2></div>
+    <div class="figs"><figure class="fig"><div class="dwgwrap"><svg viewBox="1500 -3400 3100 3900" class="dwg cad " role="img" aria-label="剖面：樓梯下儲藏室（往西看）" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="brick" width="70" height="70" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="70" height="70" class="brickbg"/><line x1="0" y1="0" x2="0" y2="70" class="hatch"/></pattern><pattern id="conc" width="60" height="60" patternUnits="userSpaceOnUse"><rect width="60" height="60" class="concbg"/><circle cx="15" cy="20" r="4" class="concdot"/><circle cx="42" cy="44" r="3" class="concdot"/></pattern><pattern id="wet" width="120" height="120" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><rect width="120" height="120" class="wetbg"/><line x1="0" y1="0" x2="0" y2="120" class="wethatch"/></pattern><pattern id="insul" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" class="insulbg"/><path d="M0 20 Q10 0 20 20 T40 20" class="insulln"/></pattern></defs><rect x="1600" y="0" width="2900" height="150" class="slabcut"/><line x1="1845" y1="0" x2="4277" y2="0" class="floorln"/><rect x="1745" y="-3000" width="100" height="3000" class="wallcut"/><rect x="4277" y="-3200" width="200" height="3350" class="wallcut"/><rect x="1600" y="-3200" width="2900" height="200" class="slabcut"/><path d="M1044 0 L1246 -188 L1448 -375 L1650 -562 L1852 -750 L2054 -938 L2256 -1125 L2458 -1312 L2660 -1500 L2863 -1688 L3065 -1875 L3267 -2062 L3469 -2250 L3671 -2438 L3873 -2625 L4075 -2812 L4277 -3000 L4277 -3000" class="thin"/><path d="M1044 -150 L4277 -2850" class="floorln"/><text x="2700" y="-1900" class="tsm" text-anchor="middle" font-size="80" transform="rotate(-40 2700 -1900)">往三樓的樓梯（樓梯底板）</text><rect x="3400" y="-2700" width="870" height="280" class="ex"/><text x="3835" y="-2520" class="es" text-anchor="middle" font-size="80">全熱</text><rect x="3400" y="-2380" width="870" height="300" class="ex"/><text x="3835" y="-2200" class="es" text-anchor="middle" font-size="80">除濕機</text><line x1="3835" y1="-2080" x2="3835" y2="-40" class="d-cond"/><text x="3880" y="-900" class="tsm" text-anchor="start" font-size="70">排水接原廁所排水</text><rect x="1900" y="-900" width="1400" height="900" class="hidden"/><text x="2600" y="-450" class="tsm" text-anchor="middle" font-size="80">儲物（低處）</text><text x="3830" y="-2900" class="tsmA" text-anchor="middle" font-size="70">最高的南端放設備</text><line x1="4560" y1="-43.2" x2="4560" y2="-2956.8" class="dim"/><line x1="4532" y1="28" x2="4588" y2="-28" class="dimtk"/><line x1="4277" y1="0" x2="4531.2" y2="0" class="ext"/><line x1="4532" y1="-2052" x2="4588" y2="-2108" class="dimtk"/><line x1="4277" y1="-2080" x2="4531.2" y2="-2080" class="ext"/><line x1="4532" y1="-2672" x2="4588" y2="-2728" class="dimtk"/><line x1="4277" y1="-2700" x2="4531.2" y2="-2700" class="ext"/><line x1="4532" y1="-2972" x2="4588" y2="-3028" class="dimtk"/><line x1="4277" y1="-3000" x2="4531.2" y2="-3000" class="ext"/><text x="4635.6" y="-1040" class="dimt" text-anchor="middle" font-size="72" transform="rotate(-90 4635.6 -1040)">2080</text><text x="4635.6" y="-2390" class="dimt" text-anchor="middle" font-size="72" transform="rotate(-90 4635.6 -2390)">620</text><text x="4635.6" y="-2850" class="dimt" text-anchor="middle" font-size="72" transform="rotate(-90 4635.6 -2850)">300</text><line x1="1801.8" y1="380" x2="4320.2" y2="380" class="dim"/><line x1="1817" y1="408" x2="1873" y2="352" class="dimtk"/><line x1="1845" y1="0" x2="1845" y2="351.2" class="ext"/><line x1="3372" y1="408" x2="3428" y2="352" class="dimtk"/><line x1="3400" y1="0" x2="3400" y2="351.2" class="ext"/><line x1="4249" y1="408" x2="4305" y2="352" class="dimtk"/><line x1="4277" y1="0" x2="4277" y2="351.2" class="ext"/><text x="2622.5" y="455.6" class="dimt" text-anchor="middle" font-size="72">1555</text><text x="3838.5" y="455.6" class="dimt" text-anchor="middle" font-size="72">877</text></svg></div><figcaption>樓梯下越往南越高，設備放最高的南端，下面和北側當儲物</figcaption></figure></div>
+    <ol class="pts">
+      <li><strong>放南端高處</strong>：往三樓的樓梯是往南爬，儲藏室越往南越高，靠南牆那段才有 2 公尺以上的高度可以吊兩台設備；北側比較低的地方拿來放東西。</li>
+      <li><strong>空間會被吃掉一塊</strong>：兩台加維修空間大約佔掉南端 0.9×1.4 公尺的上半部，儲藏量大概少四分之一。若太擠，全熱可以選直立壁掛型。</li>
+      <li><strong>排水</strong>：除濕機的冷凝水接原本廁所的排水管，這是放這裡最大的好處之一，不用另外拉排水。</li>
+      <li><strong>噪音</strong>：除濕機有壓縮機，旁邊就是客廳。機器加防震墊，送風管出機後先接一段消音軟管，儲藏室門做密閉門，客廳聽到的會很小。</li>
+      <li><strong>保養</strong>：濾網打開門就換得到，不用爬天花維修孔，這點比吊在客廳天花好很多。</li>
+    </ol>
+  </section>
+  <section class="sheet" id="verdict" aria-labelledby="verdict-t">
+    <div class="tb"><span class="code">04</span><h2 id="verdict-t">結論和要確認的事</h2></div>
+    <div class="verdict">
+      <p><strong>設備放樓梯下儲藏室是對的。</strong>它在整層中間，往客廳、主臥都只要穿一道牆，客廳天花不用走任何風管，2600 守得住，排水和保養也方便。</p>
+      <p><strong>建議把全熱的排風從洗衣間改到前面外牆。</strong>拉到洗衣間要穿整個客廳、跨 3 根以上的梁，每根降 18–20 公分，客廳就會多出好幾條低於 2600 的降板。改從前面出，新風、排風各一支管，只走主臥衣櫃頂和牆邊。</p>
+    </div>
+    <h3>要確認</h3>
+    <ol class="pts">
+      <li>梁的位置和梁底高度（客廳和主臥），這決定 A 案在主臥要不要降板、降多少。</li>
+      <li>前面外牆可不可以開兩個 Ø16 的孔（新風一個、排風一個），有沒有冷氣室外機、鐵窗擋到。</li>
+      <li>全熱只服務 2F，還是也要送到 3F、4F？要送上樓就得在樓梯旁多留一條直的管道間。</li>
+      <li>兩台設備的實際型號和尺寸（特別是高度），確認儲藏室南端放得下，門也搬得進去。</li>
+      <li>原廁所的排水管位置，除濕機的排水要有洩水坡度，不夠就加小排水泵。</li>
+    </ol>
+  </section>
+  <footer><p>梁位是照柱位推估畫的，不是實測；樓梯下的高度用之前模型的樓梯（16 階）估算。風管的路線和降板高度，以廠商現場丈量為準。</p></footer>
+</div>
